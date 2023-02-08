@@ -40,7 +40,7 @@ If everything looks good, commit the new `rtd_requirements.txt` to git. This fil
 
 - [ ] `rtd_requirements.txt` is updated in `dev` branch
 
-Once you push those changes to GitHub, if you want you can go to [the dev documentation](dynamite.readthedocs.io/en/dev) and make sure it looks like you expect!
+Once you push those changes to GitHub, if you want you can go to [the dev documentation](https://dynamite.readthedocs.io/en/dev) and make sure it looks like you expect!
 
 ### 3. Build dynamite from source
 
