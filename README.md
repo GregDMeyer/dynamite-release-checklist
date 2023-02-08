@@ -1,4 +1,4 @@
-# dynamite release tools
+# dynamite release checklist
 
 This repository contains a few scripts to help automate creating a new release of dynamite, ensuring that all tests pass etc. You will spend a lot of time waiting for builds/tests to run, so have something else to do while you wait!
 
