@@ -145,9 +145,21 @@ docker run --rm -it -w /home/dnm/work -v $PWD:/home/dnm/work --entrypoint=bash g
 
 ### 8. Test example scripts
 
-Make sure any example scripts in `examples/scripts` run correctly. Currently we don't have any example scripts in there!
+Make sure the example scripts in `examples/scripts` run correctly.
+TODO: should automate this!
 
 - [ ] Examples look good
+
+Also, there are a few things that should be ensured in the examples:
+
+- [ ] "In this example" in each example's README matches the content in `examples/scripts/README.md`
+- [ ] `README.md` in each example's directory is updated to follow `README.ipynb`
+
+For that second one, you can use the command
+
+```bash
+jupyter-nbconvert README.ipynb --to markdown
+```
 
 ### 9. Test benchmarking script
 
