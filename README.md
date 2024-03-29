@@ -140,15 +140,21 @@ If you need to change anything in the notebooks, remember that you need to mount
 **Note:** This repository contains a script to automatically run all of the example notebooks. This can be helpful if you want to quickly make sure none of them give errors when all the cells are run. However I recommend doing it manually so you can also read the output and make sure the tutorials are still correct! If you want to use it, run it like so (in this repo's source directory):
 
 ```bash
-docker run --rm -it -w /home/dnm/work -v $PWD:/home/dnm/work --entrypoint=bash gdmeyer/dynamite:latest-jupyter test_all_examples.sh
+docker run --rm -it -w /home/dnm/work -v $PWD:/home/dnm/work --entrypoint=bash gdmeyer/dynamite:latest-jupyter test_tutorial.sh
 ```
 
 ### 8. Test example scripts
 
 Make sure the example scripts in `examples/scripts` run correctly.
-TODO: should automate this!
+You can use the following command (run in this directory):
+
+```bash
+docker run --rm -t -w /home/dnm/work -v $PWD:/home/dnm/work --cap-add=SYS_PTRACE gdmeyer/dynamite:latest bash run_all_example_scripts.sh
+```
 
 - [ ] Examples look good
+
+TODO: check plotting scripts too?
 
 Also, there are a few things that should be ensured in the examples:
 
