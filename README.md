@@ -189,14 +189,9 @@ You also need to update the header of the changelog to reflect the new version n
 
 - [ ] Changelog updated
 
-Now commit this change. Then, you should tag this commit with the version string (that is, the version preceded by `v`). For example in bash, to just use what is in `VERSION`:
-
-```bash
-git tag v$(cat VERSION)
-```
+Now commit this change.
 
 - [ ] New version committed
-- [ ] New version tagged
 
 ### 11. Merge changes into master
 
@@ -213,7 +208,27 @@ There shouldn't be any merge conflicts unless for some reason there were changes
 
 Look at all that work that went into this release! Wow. Good job.
 
-### 12. Re-build docker images
+### 12. Tag release
+
+First check that the information in `.zenodo.json` is correct; update and commit if necessary.
+
+- [ ] Zenodo data is correct
+
+Now tag the current commit with the version string (that is, the version preceded by `v`). For example in bash, to just use what is in `VERSION`:
+
+```bash
+git tag v$(cat VERSION)
+```
+
+- [ ] New version tagged
+
+### 13. Merge master back into dev
+
+In case there were any changes you had to do to resolve the merge etc. in the main branch.
+
+- [ ] `dev` and `master` are synced up
+
+### 14. Re-build docker images
 
 Now you need to re-build the docker images to use the master branch and include the updated version number. This should be quite quick because docker should have cached all the steps up until installing dynamite.
 
@@ -223,7 +238,9 @@ python docker/build.py
 
 - [ ] docker images rebuilt
 
-### 13. Push docker images
+### 15. Push docker images
+
+> **NOTE:**  This is where everything becomes public! Make sure you are ready for the world to see your work!
 
 First, it's a good idea to remove old images in your local docker (e.g. those tagged with the previous release). Supposing that `v0.2.3` was the previous release, I run:
 
@@ -243,7 +260,7 @@ docker images --format "{{.Repository}}:{{.Tag}}" 'gdmeyer/dynamite' | xargs -n 
 
 - [ ] All images have been pushed to DockerHub!
 
-### 14. Push to GitHub
+### 16. Push to GitHub
 
 Simply run `git push` to push the new version of master to GitHub! Make sure `dev` is updated on GitHub too.
 
@@ -254,7 +271,7 @@ To get the tag you made onto GitHub you need to also do `git push --tags`. Note 
 
 - [ ] My new tag is on GitHub
 
-### 15. Make a new release on GitHub
+### 17. Make a new release on GitHub
 
 Now you can go to GitHub, make a new release, and select the new tag you made for the release. Note that this step will also trigger a new archive with a new DOI on Zenodo.
 
@@ -267,7 +284,7 @@ You should take a look at Zenodo to make sure the new release shows up too. Also
 - [ ] New release is on Zenodo
 - [ ] Metadata looks correct
 
-### 16. Check that ReadTheDocs build worked
+### 18. Check that ReadTheDocs build worked
 
 Pushing to master on GitHub should trigger a new build on ReadTheDocs. Just take a look at [dynamite.readthedocs.io](https://dynamite.readthedocs.io/) and make sure everything looks good!
 
@@ -277,10 +294,10 @@ Note that ReadTheDocs might take a minute or two to process the build before the
 
 Now your release is complete! The rest is just housekeeping.
 
-### 17. Update dynamite on clusters
+### 19. Update dynamite on clusters
 
 Now with the new release out, make sure you update the version of dynamite on any compute clusters you manage for the group.
 
-### 18. Submit job to test dynamite at scale on clusters
+### 20. Submit job to test dynamite at scale on clusters
 
 With the new release installed on the clusters, it might be a good idea to submit a few jobs running the integration tests at larger system sizes that you couldn't reach on your machine, just to make sure everything works at scale. In particular try running with the `--skip-medium` option to `run_all_tests.py` so that you can push to larger `L` on the cluster.
