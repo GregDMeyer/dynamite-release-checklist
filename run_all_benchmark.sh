@@ -4,8 +4,8 @@ set -e
 
 # generic tests
 TESTS=(
-    'mpirun -n 1 python /home/dnm/benchmarking/benchmark.py -L 16 -H MBL --track_memory --evolve --mult --norm --eigsolve --rdm --check-conserves'
-    'mpirun -n 2 python /home/dnm/benchmarking/benchmark.py -L 16 -H MBL --track_memory --evolve --mult --norm --eigsolve --rdm --check-conserves'
+    'mpirun -n 1 python /home/dnm/benchmarking/benchmark.py -L 16 -H MBL --evolve --mult --norm --eigsolve --rdm --check-conserves'
+    'mpirun -n 2 python /home/dnm/benchmarking/benchmark.py -L 16 -H MBL --evolve --mult --norm --eigsolve --rdm --check-conserves'
 
     # arg tests
     'mpirun -n 1 python /home/dnm/benchmarking/benchmark.py -L 16 -H MBL --evolve -t 0.5 --eigsolve --nev 2 --mult --mult_count 10 --rdm --keep 4 --check-conserves'
@@ -39,6 +39,9 @@ TESTS=(
 )
 
 for ((i = 0; i < ${#TESTS[@]}; i++)); do
+    echo
+    echo ================
+    echo
     echo ${TESTS[$i]}
     eval ${TESTS[$i]}
 done
