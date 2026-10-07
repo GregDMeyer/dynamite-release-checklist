@@ -77,6 +77,10 @@ To see what combinations of Ubuntu/CUDA version are available, look at the tags 
 
 It's not critical that these all be the very latest release but we just want to make sure we don't forget to update them occasionally. Sometimes upgrading to too new of a release breaks things like PETSc or [compatibility with drivers on certain compute clusters](https://docs.nvidia.com/deploy/cuda-compatibility/#minor-version-compatibility) so I would maybe stick to still-supported but not bleeding edge releases.
 
+Also, make sure to update the CUDA compute capabilities in `docker/build.py` to match the architectures you want to support (probably all the reasonable latest ones).
+
+- [ ] CUDA compute capabilities are updated
+
 ### 5. Build and test debug docker images
 
 With docker installed, run the following command, from the root directory of the docker source:
