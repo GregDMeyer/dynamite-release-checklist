@@ -102,8 +102,6 @@ To test each of the resulting images, go to the dynamite integration tests direc
 
 - [ ] all tests passed
 
-**Note:** For me (on 2023-02-08), the GPU tests seemed to hang at `python3 test_evolve.py --shell --gpu -v 0 -L 12` with debug builds. I think it's just that running debug on GPU is very slow; I don't expect anything to meaningfully change switching to smaller system sizes so I ran those GPU tests at $L = 8$ and they ran fine.
-
 ### 6. Build non-debug docker images
 
 Now build non-debug docker images:
