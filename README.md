@@ -130,7 +130,7 @@ I know it is annoying but I would run the integration tests on all of these imag
 Use the Jupyter docker image to go through each of the Jupyter tutorial notebooks. They are included in the docker image, so just start the Jupyter docker and in JupyterLab go to the `examples/tutorial` directory in the left panel. Here is the command to get JupyterLab going:
 
 ```bash
-docker run --rm -p 8887:8887 gdmeyer/dynamite:latest-jupyter
+podman run --rm -p 8887:8887 gdmeyer/dynamite:latest-jupyter
 ```
 
 The goals are to make sure everything runs, and also to make sure that the tutorials don't contain any old leftovers that aren't relevant any more with the new changes in this release.
@@ -142,7 +142,7 @@ If you need to change anything in the notebooks, remember that you need to mount
 **Note:** This repository contains a script to automatically run all of the example notebooks. This can be helpful if you want to quickly make sure none of them give errors when all the cells are run. However I recommend doing it manually so you can also read the output and make sure the tutorials are still correct! If you want to use it, run it like so (in this repo's source directory):
 
 ```bash
-docker run --rm -it -w /home/dnm/work -v $PWD:/home/dnm/work --entrypoint=bash gdmeyer/dynamite:latest-jupyter test_tutorial.sh
+podman run --rm -it -w /home/dnm/work -v $PWD:/home/dnm/work --entrypoint=bash gdmeyer/dynamite:latest-jupyter test_tutorial.sh
 ```
 
 ### 8. Test example scripts
@@ -151,7 +151,7 @@ Make sure the example scripts in `examples/scripts` run correctly.
 You can use the following command (run in this directory):
 
 ```bash
-docker run --rm -t -w /home/dnm/work -v $PWD:/home/dnm/work --cap-add=SYS_PTRACE gdmeyer/dynamite:latest bash run_all_example_scripts.sh
+podman run --rm -t -w /home/dnm/work -v $PWD:/home/dnm/work --cap-add=SYS_PTRACE gdmeyer/dynamite:latest bash run_all_example_scripts.sh
 ```
 
 - [ ] Examples look good
@@ -176,7 +176,7 @@ Make sure none of the changes broke the benchmarking script. This repository con
 The script is `./run_all_benchmark.sh`. You can run it using the docker images by running a command like:
 
 ```bash
-docker run --rm -t -w /home/dnm/work -v $PWD:/home/dnm/work --cap-add=SYS_PTRACE gdmeyer/dynamite:latest bash run_all_benchmark.sh
+podman run --rm -t -w /home/dnm/work -v $PWD:/home/dnm/work --cap-add=SYS_PTRACE gdmeyer/dynamite:latest bash run_all_benchmark.sh
 ```
 
 - [ ] Benchmarks run without errors
@@ -249,7 +249,7 @@ python docker/build.py
 First, it's a good idea to remove old images in your local docker (e.g. those tagged with the previous release). Supposing that `v0.2.3` was the previous release, I run:
 
 ```bash
-docker images --format "{{.Repository}}:{{.Tag}}" 'gdmeyer/dynamite' | grep 0.2.3 | xargs -n 1 docker rmi
+podman images --format "{{.Repository}}:{{.Tag}}" 'docker.io/gdmeyer/dynamite' | grep 0.2.3 | xargs -n 1 podman rmi
 ```
 
 Now run `docker images`. Make sure that the tags there are only ones you want to publish, because the next command here will publish all dynamite docker images you have locally onto DockerHub! In particular, all the tags there should have a "creation" date in the last few minutes, because you just rebuilt them.
@@ -259,7 +259,7 @@ Now run `docker images`. Make sure that the tags there are only ones you want to
 When you are ready, use the following command to push all dynamite docker images to GitHub:
 
 ```bash
-docker images --format "{{.Repository}}:{{.Tag}}" 'gdmeyer/dynamite' | xargs -n 1 docker push
+podman images --format "{{.Repository}}:{{.Tag}}" 'docker.io/gdmeyer/dynamite' | xargs -n 1 podman push
 ```
 
 - [ ] All images have been pushed to DockerHub!
